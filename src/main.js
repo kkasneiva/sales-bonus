@@ -42,20 +42,17 @@ function analyzeSalesData(data, options) {
     || !Array.isArray(data.products) || data.products.length === 0
     || !Array.isArray(data.purchase_records) || data.purchase_records.length === 0
     ) {
-    console.error('Некорректные входные данные');
-    return [];
+    throw new Error('Некорректные входные данные');
     }
 
     // @TODO: Проверка наличия опций
     if (!options) {
-    console.error('Не переданы опции');
-    return [];
+        throw new Error('Не переданы опции');
     }
 
     const { calculateRevenue, calculateBonus } = options;
     if (!calculateRevenue || !calculateBonus) {
-        console.error('Отсутствуют функции расчета (calculateRevenue / calculateBonus)');
-        return [];
+        throw new Error('Отсутствуют функции расчета (calculateRevenue / calculateBonus)');
     }
 
     // @TODO: Подготовка промежуточных данных для сбора статистики
